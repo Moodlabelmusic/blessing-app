@@ -1,0 +1,32 @@
+.roller-coaster {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+.steps-container {
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 900px;
+  margin-top: 10px;
+}
+
+.step {
+  width: 25px;
+  height: 25px;
+  background-color: #ddd;
+  color: black;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.step.active {
+  background-color: blue;
+  color: white;
+}
