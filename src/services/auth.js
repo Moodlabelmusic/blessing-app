@@ -1,26 +1,23 @@
-const API_URL = "https://your-auth-api.com/login"; // Replace with your API URL
+import { isJwtExpired } from 'jwt-check-expiration';
 
-export const login = async (email, password) => {
+const API_URL = "http://localhost:3001/api/login"; // Replace with your API URL
+
+export const login = async (password1, password2) => {
   try {
     const response = await fetch(API_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ password1, password2 }),
     });
 
     if (!response.ok) {
       throw new Error("Invalid credentials");
     }
 
-    const data = await response.json();
-    const { token, expiresIn } = data; // API should return token & expiration time
-
-    const expirationTime = Date.now() + expiresIn * 1000; // Convert seconds to ms
-
+    const token = await response.text()
     localStorage.setItem("token", token);
-    localStorage.setItem("tokenExpiration", expirationTime);
 
     return true;
   } catch (error) {
@@ -31,20 +28,17 @@ export const login = async (email, password) => {
 
 export const logout = () => {
   localStorage.removeItem("token");
-  localStorage.removeItem("tokenExpiration");
   window.location.reload(); // Refresh to force login page
 };
 
 export const isAuthenticated = () => {
-  return true;
   const token = localStorage.getItem("token");
-  const expiration = localStorage.getItem("tokenExpiration");
 
-  if (!token || !expiration) {
+  if (!token) {
     return false;
   }
 
-  if (Date.now() > parseInt(expiration, 10)) {
+  if (isJwtExpired(token)) {
     logout(); // Token expired, log out user
     return false;
   }

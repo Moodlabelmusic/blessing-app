@@ -1,0 +1,20 @@
+{
+  "questions": [
+    {
+      "id": 0,
+      "question": "What is the capital of France?",
+      "answer": "Paris",
+      "startDate": "2025-01-01",
+      "isDone": false,
+      "media":  ""
+    },
+    {
+      "id": 1,
+      "question": "What is the capital of Colombia?",
+      "answer": "Bogota",
+      "startDate": "2025-03-20",
+      "isDone": false,
+      "media":  ""
+    }
+  ]
+}
