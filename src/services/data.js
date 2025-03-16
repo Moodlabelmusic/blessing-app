@@ -9,12 +9,14 @@ export const getState = async () => {
     });
   
     if (!response.ok) {
-      throw new Error("error has ocurred");
+      throw new Error("error has ocurred", {
+        cause: response.status,
+      });
     }
   
     return await response.json();
   } catch(error) {
-    console.error("Getting state: ", error);
+    console.error("Getting state: ", error, error.cause);
   }
 }
 
@@ -30,12 +32,17 @@ export const updateState = async (question) => {
     });
   
     if (!response.ok) {
-      throw new Error("error has ocurred");
+      throw new Error("error has ocurred", {
+        cause: response.status,
+      });
     }
   
     return true
   } catch (error)  {
-    console.error("Updating state: ", error);
+    console.error("Updating state: ", error, error.cause);
+    if(error.cause === 401) {
+      window.location.reload();
+    }
     return false;
   }
 }

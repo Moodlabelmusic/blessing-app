@@ -6,7 +6,7 @@
       "answer": "Paris",
       "startDate": "2025-01-01",
       "isDone": false,
-      "media":  ""
+      "media":  "asdf"
     },
     {
       "id": 1,
@@ -14,7 +14,7 @@
       "answer": "Bogota",
       "startDate": "2025-03-20",
       "isDone": false,
-      "media":  ""
+      "media":  "asd"
     }
   ]
 }

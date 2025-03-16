@@ -11,6 +11,7 @@ const Dashboard = () => {
   const [step, setStep] = useState(0);
   const [isPending, startTransition] = useTransition();
   const [question, setQuestion] = useState();
+  const [nextQuestion, setNextQuestion] = useState();
 
   const handleNextStep = async () => {
     const updatedQuestion = {
@@ -24,9 +25,13 @@ const Dashboard = () => {
   };
 
   const getCurrentState = async () => {
-    const state = await getState();
-    setStep(state.id)
-    setQuestion(state);
+    try {
+      const { question, nextQuestion } = await getState();
+      setStep(question?.id ?? nextQuestion?.id)
+      setQuestion(question);
+      setNextQuestion(nextQuestion);
+    } catch (err) {
+    }
   }
 
   useEffect(() => {
@@ -41,7 +46,7 @@ const Dashboard = () => {
       <div className={`content-container ${isPending ? "fading" : ""}`}>
         {/* Render only the active component */}
         {!isAuthenticated() && <Login onLogin={getCurrentState}/>}
-        {isAuthenticated() && !question?.isDone && (
+        {isAuthenticated() && question && !question?.isDone && (
           <QuestionCard 
             question={question?.question}
             correctAnswer={question?.answer}
@@ -49,8 +54,8 @@ const Dashboard = () => {
           />
         )}
 
-        {isAuthenticated() && question?.isDone && (
-          <MediaCard mediaType="image" mediaSrc="https://pngimg.com/d/mario_PNG53.png" type="image" targetDate="2025-12-31T23:59:59"/>
+        {isAuthenticated() && ((question && question.isDone) || !question) && (
+          <MediaCard mediaType={question?.media ? "video" : ""} mediaSrc={question?.media} type="image" targetDate={nextQuestion?.startDate}/>
         )}
       </div>
     </div>

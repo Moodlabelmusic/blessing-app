@@ -32,13 +32,17 @@ const MediaCard = ({ mediaType, mediaSrc, targetDate }) => {
   return (
     <Card className="custom-card">
       <Card.Body>
-        <h3 className="countdown-title">Time Left:</h3>
-        <div className="countdown-timer">
-          <span>{String(timeLeft.days).padStart(2, "0")}d</span>
-          <span>{String(timeLeft.hours).padStart(2, "0")}h</span>
-          <span>{String(timeLeft.minutes).padStart(2, "0")}m</span>
-          <span>{String(timeLeft.seconds).padStart(2, "0")}s</span>
-        </div>
+        {targetDate &&
+          <React.Fragment>
+            <h3 className="countdown-title">Time Left:</h3>
+            <div className="countdown-timer">
+              <span>{String(timeLeft.days).padStart(2, "0")}d</span>
+              <span>{String(timeLeft.hours).padStart(2, "0")}h</span>
+              <span>{String(timeLeft.minutes).padStart(2, "0")}m</span>
+              <span>{String(timeLeft.seconds).padStart(2, "0")}s</span>
+            </div>
+          </React.Fragment>
+        }
 
         {mediaType === "image" ? (
           <img src={mediaSrc} alt="Media" className="media-content" />
@@ -48,7 +52,7 @@ const MediaCard = ({ mediaType, mediaSrc, targetDate }) => {
             Your browser does not support the video tag.
           </video>
         ) : (
-          <p>No media available.</p>
+          <React.Fragment></React.Fragment>
         )}
       </Card.Body>
     </Card>

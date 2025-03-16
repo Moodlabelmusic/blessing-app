@@ -23,17 +23,23 @@ export class AppService {
       throw new UnauthorizedException();
     }
     return jwt.sign({}, this.authConfig.privateKey, {
-      expiresIn: '1d'
+      expiresIn: '10000'
     });
   }
 
   getState() {
     const { questions } = this.databaseService.get();
-    const completedQuestions = questions.filter(({isDone}) => isDone);
-    const nextQuestion = questions.find(
-      ({isDone, startDate}) => !isDone && Date.now() > new Date(startDate).getTime()
-    );
-    return nextQuestion || completedQuestions[completedQuestions.length - 1];
+    let completedQuestionIdx = questions.findLastIndex(({isDone}) => isDone);
+    let completedQuestion = questions[completedQuestionIdx];
+    if (completedQuestionIdx < 0 && Date.now() > new Date(questions[0].startDate).getTime()) {
+      completedQuestionIdx = 0;
+      completedQuestion = questions[0];
+    }
+    const nextQuestion = questions[completedQuestionIdx+1];
+    return {
+      question: completedQuestion,
+      nextQuestion: nextQuestion,
+    }
   }
 
   updateState(question) {
