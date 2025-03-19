@@ -1,10 +1,11 @@
-const API_URL = "http://localhost:3001/api"; // Replace with your API URL
+const API_URL = "http://api-blessing.minagle.com/api"; // Replace with your API URL
 
 export const getState = async () => {
   try {
+    const token = localStorage.getItem('token');
     const response = await fetch(`${API_URL}/state`, {
       headers: {
-        authorization: localStorage.getItem('token'),
+        authorization: token,
       }
     });
   
@@ -22,11 +23,12 @@ export const getState = async () => {
 
 export const updateState = async (question) => {
   try {
+    const token = localStorage.getItem('token');
     const response = await fetch(`${API_URL}/state`, {
       method: 'PUT',
       headers: {
         "Content-Type": "application/json",
-        authorization: localStorage.getItem('token'),
+        authorization: token,
       },
       body: JSON.stringify(question),
     });

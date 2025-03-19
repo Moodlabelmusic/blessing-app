@@ -14,6 +14,6 @@ export class DatabaseService {
   }
 
   private getDbPath() {
-    return path.join(__dirname, 'data', 'db.json');
+    return path.join(__dirname, '..', '..', 'data', 'db.json');
   }
 }

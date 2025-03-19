@@ -23,7 +23,7 @@ export class AppService {
       throw new UnauthorizedException();
     }
     return jwt.sign({}, this.authConfig.privateKey, {
-      expiresIn: '10000'
+      expiresIn: '1d'
     });
   }
 

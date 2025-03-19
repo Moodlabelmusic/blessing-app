@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import { isAuthenticated } from "../services/auth";
 import "./Dashboard.css";
 import { getState, updateState } from "../services/data";
+import Title from "../components/Title";
 
 const Dashboard = () => {
   const [step, setStep] = useState(0);
@@ -40,6 +41,7 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
+      <Title />
       {/* Hide steps on login page */}
       {isAuthenticated() && <Header currentStep={step} />}
 

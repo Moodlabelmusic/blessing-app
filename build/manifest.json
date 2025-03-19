@@ -1,0 +1,9 @@
+{
+  "short_name": "Blessing - Mini juego",
+  "name": "Erika & Camilo",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}

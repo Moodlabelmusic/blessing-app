@@ -34,7 +34,7 @@ const MediaCard = ({ mediaType, mediaSrc, targetDate }) => {
       <Card.Body>
         {targetDate &&
           <React.Fragment>
-            <h3 className="countdown-title">Time Left:</h3>
+            <h3 className="countdown-title">Inicia en:</h3>
             <div className="countdown-timer">
               <span>{String(timeLeft.days).padStart(2, "0")}d</span>
               <span>{String(timeLeft.hours).padStart(2, "0")}h</span>
