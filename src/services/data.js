@@ -1,4 +1,4 @@
-const API_URL = "http://api-blessing.minagle.com/api"; // Replace with your API URL
+export const API_URL = "http://api-blessing.minagle.com/api"; // Replace with your API URL
 
 export const getState = async () => {
   try {

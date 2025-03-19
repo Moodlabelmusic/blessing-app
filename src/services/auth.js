@@ -1,10 +1,10 @@
 import { isJwtExpired } from 'jwt-check-expiration';
-
-const API_URL = "http://localhost:3001/api/login"; // Replace with your API URL
+import { API_URL } from './data';
 
 export const login = async (password1, password2) => {
   try {
-    const response = await fetch(API_URL, {
+    const url = `${API_URL}/login`;
+    const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
